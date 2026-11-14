@@ -42,8 +42,14 @@ int main() {
         // 8. If keyboard is ready
         if(FD_ISSET(0, &readfds)){
             fgets(buffer, sizeof(buffer), stdin);
-            send(sockfd, buffer, strlen(buffer), 0);
-        }
+
+            if(strcmp(buffer, "exit\n") == 0){
+                printf("Leaving chat...\n");
+                break;
+    }
+
+    send(sockfd, buffer, strlen(buffer), 0);
+}
 
         // 9. If client socket is ready
         if(FD_ISSET(sockfd, &readfds)){
